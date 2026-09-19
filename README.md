@@ -1,23 +1,23 @@
-# FreeSpace Max — Safe Disk Cleanup
+# FreeSpace Max — 安全深度清理
 
-FreeSpace Max is a Codex skill for reclaiming Windows disk space while protecting bootability, application launch files, recent chats, active projects, and uncertain personal data.
+FreeSpace Max 是一个 Codex skill，用于释放 Windows 磁盘空间，同时保护系统启动、软件启动文件、近期聊天记录、正在使用的项目和不确定的个人数据。
 
-It prioritizes caches, logs, temporary files, stale build artifacts, unused development dependencies, old installers, update leftovers, and other low-risk candidates. It keeps the desktop unchanged, preserves recent chat data, asks before uncertain deletions, and produces a concise cleanup report.
+它优先处理缓存、日志、临时文件、过期构建产物、未使用的开发依赖、旧安装包、更新残留和其他低风险项目。它不会自动改动桌面，会保留近期聊天数据，在删除不确定内容前询问，并生成精简的清理报告。
 
-## Highlights
+## 主要能力
 
-- Scans all local disks and ranks files and directories over 1 GB.
-- Cleans low-risk caches, logs, temp files, crash dumps, shader caches, package caches, and stale development artifacts.
-- Keeps logs from the last day and chat data from the last seven days when date-aware cleanup is safe.
-- Preserves browser logins, cookies, bookmarks, history, extensions, active source code, and personal-looking files.
-- Handles locked files by closing approved applications or skipping files that remain in use.
-- Requires a destination before moving anything and never silently moves uncertain data.
+- 扫描所有本地磁盘，优先列出大于 1 GB 的文件和目录。
+- 清理低风险缓存、日志、临时文件、崩溃转储、着色器缓存、包管理器缓存和过期开发产物。
+- 在能够安全按日期识别时，保留最近 1 天的日志和最近 7 天的聊天数据。
+- 保留浏览器登录状态、Cookie、收藏夹、历史记录、扩展、正在使用的源代码和疑似个人文件。
+- 对锁定文件可以先关闭获得批准的软件；仍被占用的文件会跳过并报告。
+- 移动文件前必须知道目标路径，不会静默移动不确定的数据。
 
-## Usage
+## 使用方式
 
-Install this folder as a Codex skill, then ask Codex to clean the disks using the configured safe rules. Review the dry-run summary before approving high-risk candidates.
+将此目录安装为 Codex skill，然后让 Codex 按已配置的安全规则清理磁盘。高风险候选项会在执行前显示预览清单，等待确认。
 
-## License
+## 许可证
 
 MIT
 
