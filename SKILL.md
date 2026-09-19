@@ -1,43 +1,43 @@
 ---
 name: free-space-max-safe-cleanup
-description: "Safely reclaim disk space from caches, logs, temp files, stale builds, and unused dependencies while protecting system bootability, app launch files, recent chats, and uncertain personal data."
+description: "Use when the user wants to 深度清理 Windows 磁盘、释放空间，或清理缓存、日志、临时文件、过期构建产物和未使用依赖，同时需要避免误删系统、软件和个人数据。"
 ---
 
-# FreeSpace Max — Safe Disk Cleanup
+# FreeSpace Max — 安全深度清理
 
-Use this skill when the user asks to deeply clean Windows disks, maximize free space, remove caches or stale development artifacts, or identify files that can be deleted safely.
+当用户要求深度清理 Windows 磁盘、最大化释放空间、删除缓存或过期开发产物，或识别可以安全删除的文件时，使用此 skill。
 
-## Operating policy
+## 清理规则
 
-- Maximize reclaimed space while avoiding anything that could prevent Windows or an installed application from launching.
-- Scan every local disk unless the user narrows the scope. Desktop contents are protected and must never be changed automatically.
-- Treat files that appear to be personal documents, photos, videos, archives, project source, databases, backups, or exports as uncertain. Put them in a review list rather than deleting them.
-- User directories such as Downloads, Documents, Pictures, Videos, and Music may be scanned, but personal-looking files are review-only. Do not infer that an old file is disposable solely from age.
-- Keep chat messages and attachments from the most recent 7 days. Older cache, downloaded media, thumbnails, and temporary chat files may be candidates; databases that cannot be safely filtered by date are review-only.
-- Keep application logs from the most recent 1 day when the format allows it. Older logs, crash dumps, diagnostic traces, installer leftovers, update packages, shader caches, browser cache, GPU cache, and temporary files are low-risk candidates.
-- Development artifacts such as `node_modules`, `.venv`, `venv`, `dist`, `build`, `.next`, package-manager caches, unused SDK downloads, and stale virtual environments may be candidates, including across projects. Protect active project source and lockfiles.
-- Old application versions and duplicate installers may be candidates after checking that a newer version exists and the path is not the active install.
-- System cleanup may include Recycle Bin, Windows update leftovers, error reports, old restore points, hibernation data, and other system caches. Treat pagefile configuration and files required for boot or recovery as high-risk and ask before changing them.
-- Browser cleanup should remove cache-like data only. Preserve cookies, saved logins, bookmarks, history, profiles, and extensions unless the user explicitly asks otherwise.
-- The user has no default archive drive. Ask for a destination before moving anything. If no destination is supplied, leave movable uncertain files in place and list them.
+- 最大化释放空间，但不能删除会导致 Windows 或软件无法启动的内容。
+- 除非用户缩小范围，否则扫描所有本地磁盘。桌面受保护，绝不能自动改动。
+- 疑似个人文档、照片、视频、压缩包、项目源代码、数据库、备份或导出文件的内容属于不确定项，只列入待确认清单。
+- 可以扫描下载、文档、图片、视频和音乐目录，但个人文件只能等待确认。不能仅凭文件年龄判断它可以删除。
+- 保留最近 7 天的聊天消息和附件。更早的缓存、下载媒体、缩略图和临时聊天文件可以列入候选；无法安全按日期筛选的聊天数据库只能列出。
+- 在格式支持时保留最近 1 天的应用日志。更早的日志、崩溃转储、诊断跟踪、安装残留、更新包、着色器缓存和临时文件属于低风险候选。
+- `node_modules`、`.venv`、`venv`、`dist`、`build`、`.next`、包管理器缓存、未使用 SDK 和过期虚拟环境可以列入候选。保护正在使用的项目源代码和锁文件。
+- 旧软件版本和重复安装包只有在确认存在较新版本且目标不是当前安装目录后，才能列为候选。
+- 系统清理可以包括回收站、Windows 更新残留、错误报告、旧还原点、休眠数据和其他系统缓存。分页文件配置以及启动或恢复所需文件属于高风险项目，修改前必须询问。
+- 浏览器只清理缓存类数据。除非用户另行要求，否则保留 Cookie、登录状态、收藏夹、历史记录、配置文件和扩展。
+- 用户没有默认归档盘。移动文件前必须询问目标路径；没有目标路径时，不移动不确定文件，只列出清单。
 
-## Required workflow
+## 执行流程
 
-1. Inspect disk free space, mounted drives, permissions, running processes, and the paths that will be considered. Do not delete during discovery.
-2. Rank directories and files, emphasizing items at least 1 GB, and classify each candidate as low-risk, review-required, protected, or locked.
-3. Present a concise dry-run summary before high-risk changes. Low-risk cleanup can proceed automatically under the user's standing policy; ask about review-required items and destination paths for moves.
-4. Close only applications that hold files needed for an approved cleanup. If a process cannot be closed safely, skip its locked files and continue.
-5. Delete only exact, verified paths. Never use a broad wildcard or recursively delete a user profile, project root, Windows root, or application root. Preserve the desktop and protected files.
-6. Re-scan the affected paths and report reclaimed space, deleted items, skipped/locked paths, and items awaiting review. Keep the report concise and do not create a persistent history unless requested.
+1. 检查磁盘可用空间、挂载的磁盘、权限、运行中的进程和候选路径。发现阶段不删除文件。
+2. 按大小排序，重点关注至少 1 GB 的项目，并将候选项分为低风险、需要确认、受保护或被占用。
+3. 高风险操作前显示精简的预览清单。低风险清理可按用户既定规则自动执行；需要确认的项目和移动目标必须询问。
+4. 只关闭为已批准清理而占用文件的软件。无法安全关闭时，跳过锁定文件并继续。
+5. 只删除已核实的精确路径。不能使用宽泛通配符，也不能递归删除用户配置文件、项目根目录、Windows 根目录或软件根目录。保护桌面和受保护文件。
+6. 重新扫描受影响路径，报告释放空间、删除项、跳过或锁定路径以及待确认项目。报告保持精简，除非用户要求，否则不保存历史记录。
 
-## Confirmation rules
+## 确认规则
 
-Ask before deleting anything that could contain personal data, an active project, a chat database, a current application installation, a backup, a restore point the user may need, or a system file whose role is uncertain. Also ask before moving files when no destination path is known. Do not ask again for the user's standing low-risk policy, but obtain fresh confirmation for a specific destructive high-risk action.
+删除可能包含个人数据、正在使用的项目、聊天数据库、当前软件安装、备份、用户可能需要的还原点或作用不确定的系统文件前，必须询问。没有目标路径时，移动文件前也必须询问。用户已经授予的低风险清理规则无需重复确认，但具体的高风险破坏性操作必须重新确认。
 
-## Safety checks
+## 安全检查
 
-- Verify the resolved absolute path stays within the intended target directory before recursive deletion.
-- Check file ownership, attributes, reparse points, and junctions; skip links and avoid double counting.
-- Use actual file sizes and disclose when logical size may differ from physical allocation because of compression, sparse files, or hard links.
-- Never expose secrets found in config files, tokens, credentials, or chat databases in the report.
+- 递归删除前，确认解析后的绝对路径仍在预期目标目录内。
+- 检查文件所有者、属性、重解析点和目录联接；跳过链接并避免重复统计。
+- 使用实际文件大小，并说明压缩、稀疏文件或硬链接可能导致逻辑大小与磁盘实际占用不同。
+- 报告中绝不能暴露配置文件里的密钥、令牌、凭证或聊天数据库内容。
 
