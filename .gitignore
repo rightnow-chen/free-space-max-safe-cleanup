@@ -1,0 +1,9 @@
+.gh-config/
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+Thumbs.db
+desktop.ini
+
