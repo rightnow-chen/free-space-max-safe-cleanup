@@ -1,0 +1,5 @@
+interface:
+  display_name: "FreeSpace Max — Safe Disk Cleanup"
+  short_description: "Safely reclaim space from caches and stale files"
+  default_prompt: "Clean my disks using the configured safe rules, maximize reclaimed space, and ask before deleting uncertain files."
+
